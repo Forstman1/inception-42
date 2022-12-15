@@ -2,13 +2,13 @@
 /**
  * The base configuration for WordPress
  *
- * The wp-config.php creation script uses this file during the installation.
- * You don't have to use the web site, you can copy this file to "wp-config.php"
- * and fill in the values.
+ * The wp-config.php creation script uses this file during the
+ * installation. You don't have to use the web site, you can
+ * copy this file to "wp-config.php" and fill in the values.
  *
  * This file contains the following configurations:
  *
- * * Database settings
+ * * MySQL settings
  * * Secret keys
  * * Database table prefix
  * * ABSPATH
@@ -18,49 +18,49 @@
  * @package WordPress
  */
 
-// ** Database settings - You can get this info from your web host ** //
+// ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define( 'DB_NAME', 'wordpress' );
 
-/** Database username */
+/** MySQL database username */
 define( 'DB_USER', 'sami' );
 
-/** Database password */
+/** MySQL database password */
 define( 'DB_PASSWORD', 'nice' );
 
-/** Database hostname */
+/** MySQL hostname */
 define( 'DB_HOST', 'mariadb' );
 
-/** Database charset to use in creating database tables. */
+/** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
 
-/** The database collate type. Don't change this if in doubt. */
+/** The Database Collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
 
+define( 'WP_ALLOW_REPAIR', true );
+
 /**#@+
- * Authentication unique keys and salts.
+ * Authentication Unique Keys and Salts.
  *
- * Change these to different unique phrases! You can generate these using
- * the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}.
- *
- * You can change these at any point in time to invalidate all existing cookies.
- * This will force all users to have to log in again.
+ * Change these to different unique phrases!
+ * You can generate these using the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}
+ * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
  *
  * @since 2.6.0
  */
-
-define('AUTH_KEY',         'j!(RA+7 BU] m4$lV!QA8@nPw$]S(+ZG<YD>.;$BAQ?v}ge}/c?,1%7#.kif`k_E');
-define('SECURE_AUTH_KEY',  'MmkM-&t;D!?e$AZ9nh&jtcQPsC26Q&<W=+H$M_5];5fX$AXeO;aqDpw-$0EQ&=Vf');
-define('LOGGED_IN_KEY',    '7hRKpg#lWZ=~$X2eNeI(0(<E|Pc?CDk~%Zos8I+eS2:geJjD=WDz7*$w8kqgX8.d');
-define('NONCE_KEY',        'd|9z-px&FNlEDCAem~#)X+aeJ$WcpuZm|V4!Ap+^7I`4iYeu7iGJt#cnq]*~hGB*');
-define('AUTH_SALT',        'mrBY).Sth}`w6XKeA:U(4uO``>;8L.z;hv0<JT|Ao`Qh-&-|V-1nJ<lTT~-$E&)E');
-define('SECURE_AUTH_SALT', ':qb19]>*_^#tXa~$(TIZ(HB-(anu.2-{;0=GU-0yDTq;WC%fv1[+gEwcI5T},ZS+');
-define('LOGGED_IN_SALT',   'g)FR}}NhtSV& k]A$^bxvO+-4t?]@k*vB%Q]R+*#$uUNdrexN,@n}_d>=@hsvY7f');
+define( 'AUTH_KEY',         '):Uw9 :|7$m3yy=c^IM%d8}zG6yXY%25SDUyr.r#GcDP)[b25Yn$sDLNwR~I=kwq' );
+define( 'SECURE_AUTH_KEY',  'lBWxAzhu=StQ(s-[t_D8yH8_`0NiM~d[m q<{Hri]n#UM3J;@x[ne;,k<~cN`~%,' );
+define( 'LOGGED_IN_KEY',    ' /e+%ecWs`>hA<s`|+7rmujt>3MA}GD*n=D7W%$8h*Xc!jP?hn+fw0#;;g{Ywl@k' );
+define( 'NONCE_KEY',        ' -cX{xQc|GjD$=kXd,|lUX5)*oT)ru3^px-iU{q;`1If22EqIwA0/lPIIbpbtB=C' );
+define( 'AUTH_SALT',        'U9LX s1@q6$[*VV,MUhL7tS@;I9t_u*uDQIfZdG.ei1Amy$*.RI_TSTz#y=X.>Wq' );
+define( 'SECURE_AUTH_SALT', '0<MR&l4v=cZ)8Ke/#ip>2<Ed@ j<#pvLaOMc-jEFM9^tr`X*T2qDIB@)gg.0<e2V' );
+define( 'LOGGED_IN_SALT',   'xSHh4B]r[~)h%n$f(dCt;mD}#q gy$<{ >qGgPS>XH*]jH>W<!10>H<_16l{(OdP' );
+define( 'NONCE_SALT',       '7Ea$kvU|lkO8&X]b7^#K+w! lH2)SOelLiaYYX(Zz)Ebk_]-#m,J&aM<*JedFa| ' );
 
 /**#@-*/
 
 /**
- * WordPress database table prefix.
+ * WordPress Database Table prefix.
  *
  * You can have multiple installations in one database if you give each
  * a unique prefix. Only numbers, letters, and underscores please!
@@ -79,11 +79,7 @@ $table_prefix = 'wp_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', false );
-
-/* Add any custom values between this line and the "stop editing" line. */
-
-
+define( 'WP_DEBUG', true );
 
 /* That's all, stop editing! Happy publishing. */
 

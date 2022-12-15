@@ -1,6 +1,0 @@
-CREATE DATABASE wordpress;
-CREATE USER 'sami'@'%' IDENTIFIED BY 'nice';
-GRANT ALL PRIVILEGES ON wordpress.* TO 'sami'@'%';
-FLUSH PRIVILEGES;
-
-ALTER USER 'root'@'localhost' IDENTIFIED BY '12345';

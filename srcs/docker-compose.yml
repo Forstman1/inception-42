@@ -5,14 +5,14 @@ volumes:
                 name: wordpress
                 driver: local
                 driver_opts:
-                        device: /home/forstman/data/wordpress
+                        device: /Users/sahafid/Desktop/inception-test/srcs/wordpress
                         o: bind
                         type: none
         mariadb:
                 name: mariadb
                 driver: local
                 driver_opts:
-                        device: /home/forstman/data/mariadb
+                        device: /Users/sahafid/Desktop/inception-test/srcs/mariadb
                         o: bind
                         type: none
 
@@ -20,7 +20,7 @@ services:
   nginx:
     build: ./requirements/nginx/.
     ports:
-     - "80:80"
+     - "443:443"
     depends_on:
       - wordpress
     volumes:

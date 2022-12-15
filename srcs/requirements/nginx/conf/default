@@ -1,16 +1,21 @@
 server {
-    listen 80;
-    listen [::]:80;
+    listen 443 ssl;
+    listen [::]:443 ssl;
 
-    server_name buthor.42.fr;
+    #server_name www.sahafid.42.fr sahafid.42.fr;
 
-    
+    ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+    ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+
+    ssl_protocols TLSv1.3;
+
     index index.php;
     root /var/www/html;
 
     location / {
         try_files $uri $uri/ /index.php$is_args$args;
     }
+
     location ~ [^/]\.php(/|$) { 
             try_files $uri =404;
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
@@ -22,4 +27,3 @@ server {
         }
 }
 
-   
