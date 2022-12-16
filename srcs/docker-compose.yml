@@ -37,4 +37,22 @@ services:
     build: ./requirements/mariadb/.
     volumes:
       - mariadb:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+  ftp:
+    build: ./requirements/bonus/ftp/.
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress:/var/www/html
+    ports:
+      - "500:21"
+    restart: always
+  adminer:
+    build: ./requirements/bonus/adminer/.
+    depends_on:
+      - mariadb
+    ports:
+      - "600:80"
     restart: always

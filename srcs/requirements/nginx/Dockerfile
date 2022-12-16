@@ -7,7 +7,7 @@ RUN apt -y update && apt -y upgrade && apt install -y nginx && apt install vim -
 
 COPY ./conf/default /etc/nginx/sites-available/
 
-# RUN /script.sh
+RUN /script.sh
 
-CMD ["/script.sh"]
+CMD ["nginx", "-g", "daemon off;"]
 
