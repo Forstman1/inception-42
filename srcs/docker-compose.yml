@@ -37,8 +37,6 @@ services:
     build: ./requirements/mariadb/.
     volumes:
       - mariadb:/var/lib/mysql
-    ports:
-      - "3306:3306"
     restart: always
   ftp:
     build: ./requirements/bonus/ftp/.
@@ -55,4 +53,14 @@ services:
       - mariadb
     ports:
       - "600:80"
+    restart: always
+  redis:
+    build: ./requirements/bonus/redis/.
+    volumes:
+     - wordpress:/var/www/html
+    depends_on:
+      - wordpress
+    restart: always
+  nmap:
+    build: ./requirements/bonus/nmap/.
     restart: always
