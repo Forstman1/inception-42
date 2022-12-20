@@ -3,11 +3,11 @@ FROM debian:buster
 
 RUN apt -y update && apt -y upgrade 
 
-RUN apt install vsftpd -y && cp /etc/vsftpd.conf /etc/vsftpd.conf.orig && apt install vim -y
+RUN apt install vsftpd -y
 
-# COPY ./conf/default /etc/nginx/sites-available/
+COPY ./tools/script.sh /
 
-# RUN /script.sh
+RUN /script.sh
 
-CMD ["sleep", "10000000"]
+CMD ["/usr/sbin/vsftpd", "/etc/vsftpd/vsftpd.conf"]
 

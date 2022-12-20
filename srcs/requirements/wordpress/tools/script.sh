@@ -36,3 +36,8 @@ mkdir /run/php
 cd /
 
 mv /wp-config.php /var/www/html/wp-config.php
+
+# wp plugin install redis-cache --activate --allow-root
+# wp plugin update --all --allow-root
+
+# wp redis enable --allow-root
