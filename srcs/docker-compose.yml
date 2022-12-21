@@ -42,8 +42,8 @@ services:
     build: ./requirements/bonus/ftp/.
     depends_on:
       - wordpress
-    volumes:
-      - wordpress:/var/www/html
+    # volumes:
+    #   - wordpress:/var/www/html
     ports:
       - "500:21"
     restart: always
@@ -60,7 +60,4 @@ services:
      - wordpress:/var/www/html
     depends_on:
       - wordpress
-    restart: always
-  nmap:
-    build: ./requirements/bonus/nmap/.
     restart: always

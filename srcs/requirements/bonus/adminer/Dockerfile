@@ -8,10 +8,6 @@ COPY ./tools/script.sh /
 
 RUN apt install wget -y && apt-get install apache2 php libapache2-mod-php php-curl php-cli php-mysql php-gd  -y
 
-# RUN wget "http://www.adminer.org/latest.php" -O /var/www/html/adminer.php && chown -R www-data:www-data /var/www/html/adminer.php && chmod 755 /var/www/html/adminer.php
-# COPY ./conf/default /etc/nginx/sites-available/
-
-# RUN /script.sh
 
 CMD ["/script.sh"]
 
