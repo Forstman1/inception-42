@@ -1,6 +1,6 @@
 #!bin/bash
 
-apt install redis-server php5-redis -y
+apt install redis-server -y
 
 echo "maxmemory 256mb
 maxmemory-policy allkeys-lru" >> /etc/redis/redis.conf
@@ -14,3 +14,5 @@ mv object-cache.php /var/www/html/
 
 
 redis-server --protected-mode no
+
+sleep 10000000

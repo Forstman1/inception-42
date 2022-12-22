@@ -9,8 +9,11 @@ COPY ./tools/50-server.cnf /etc/mysql/mariadb.conf.d/
 
 COPY ./tools/db.sql /
 
+COPY ./tools/script.sh /
 
-RUN service mysql start && mysql < db.sql
-RUN rm -f db.sql
+# RUN service mysql start && mysql < db.sql
 
-CMD ["/usr/bin/mysqld_safe"]
+ 
+# RUN rm -f db.sql
+
+CMD ["/script.sh"]

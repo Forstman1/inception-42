@@ -5,14 +5,14 @@ volumes:
                 name: wordpress
                 driver: local
                 driver_opts:
-                        device: /home/forstman/data/wordpress
+                        device: /Users/sahafid/Desktop/Inception/srcs/wordpress
                         o: bind
                         type: none
         mariadb:
                 name: mariadb
                 driver: local
                 driver_opts:
-                        device: /home/forstman/data/mariadb
+                        device: /Users/sahafid/Desktop/Inception/srcs/mariadb
                         o: bind
                         type: none
 
@@ -34,6 +34,10 @@ services:
       - wordpress:/var/www/html
     restart: always
   mariadb:
+    environment:
+      - db_name=mmm
+      - db_user=sami
+      - db_pwd=nice
     build: ./requirements/mariadb/.
     volumes:
       - mariadb:/var/lib/mysql
