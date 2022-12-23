@@ -32,36 +32,52 @@ services:
       - mariadb
     volumes:
       - wordpress:/var/www/html
+    environment:
+      - WP_DATABASE_NAME=wordpress
+      - WP_DATABASE_USR=sami
+      - WP_DATABASE_PWD=nice
+      - WP_DATABASE_HOST=mariadb
+      - DOMAIN_NAME=sahafid.1337.ma
+      - WP_TITLE=RiadElYacoute
+      - WP_ADMIN_USR=forstman1
+      - WP_ADMIN_PWD=1231
+      - WP_ADMIN_EMAIL=sami.hafid.hs@gmail.com
+      - WP_USR=sami1
+      - WP_EMAIL=sahafid@1337.com
+      - WP_PWD=123
+      - db_name=lol1
+      - db_user=ss
+      - db_pwd=tt
     restart: always
   mariadb:
-    environment:
-      - db_name=mmm
-      - db_user=sami
-      - db_pwd=nice
     build: ./requirements/mariadb/.
     volumes:
       - mariadb:/var/lib/mysql
+    environment:
+      - db_name=lol1
+      - db_user=ss
+      - db_pwd=tt
     restart: always
-  ftp:
-    build: ./requirements/bonus/ftp/.
-    depends_on:
-      - wordpress
-    # volumes:
-    #   - wordpress:/var/www/html
-    ports:
-      - "500:21"
-    restart: always
-  adminer:
-    build: ./requirements/bonus/adminer/.
-    depends_on:
-      - mariadb
-    ports:
-      - "600:80"
-    restart: always
-  redis:
-    build: ./requirements/bonus/redis/.
-    volumes:
-     - wordpress:/var/www/html
-    depends_on:
-      - wordpress
-    restart: always
+  # ftp:
+  #   build: ./requirements/bonus/ftp/.
+  #   depends_on:
+  #     - wordpress
+  #   # volumes:
+  #   #   - wordpress:/var/www/html
+  #   ports:
+  #     - "500:21"
+  #   restart: always
+  # adminer:
+  #   build: ./requirements/bonus/adminer/.
+  #   depends_on:
+  #     - mariadb
+  #   ports:
+  #     - "600:80"
+  #   restart: always
+  # redis:
+  #   build: ./requirements/bonus/redis/.
+  #   volumes:
+  #    - wordpress:/var/www/html
+  #   depends_on:
+  #     - wordpress
+  #   restart: always
