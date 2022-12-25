@@ -66,6 +66,8 @@ services:
       - wordpress:/var/www/html
     ports:
       - "21:21"
+      - "20:20"
+      - "40000-40005:40000-40005"
     restart: always
   adminer:
     build: ./requirements/bonus/adminer/.
