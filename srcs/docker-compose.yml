@@ -58,26 +58,26 @@ services:
       - db_user=ss
       - db_pwd=tt
     restart: always
-  # ftp:
-  #   build: ./requirements/bonus/ftp/.
-  #   depends_on:
-  #     - wordpress
-  #   # volumes:
-  #   #   - wordpress:/var/www/html
-  #   ports:
-  #     - "500:21"
-  #   restart: always
-  # adminer:
-  #   build: ./requirements/bonus/adminer/.
-  #   depends_on:
-  #     - mariadb
-  #   ports:
-  #     - "600:80"
-  #   restart: always
-  # redis:
-  #   build: ./requirements/bonus/redis/.
-  #   volumes:
-  #    - wordpress:/var/www/html
-  #   depends_on:
-  #     - wordpress
-  #   restart: always
+  ftp:
+    build: ./requirements/bonus/ftp/.
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress:/var/www/html
+    ports:
+      - "21:21"
+    restart: always
+  adminer:
+    build: ./requirements/bonus/adminer/.
+    depends_on:
+      - mariadb
+    ports:
+      - "600:80"
+    restart: always
+  redis:
+    build: ./requirements/bonus/redis/.
+    volumes:
+     - wordpress:/var/www/html
+    depends_on:
+      - wordpress
+    restart: always
