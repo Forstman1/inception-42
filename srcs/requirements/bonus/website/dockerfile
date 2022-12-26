@@ -1,0 +1,12 @@
+FROM debian:buster
+
+RUN apt update -y && apt upgrade -y
+
+RUN apt install apache2 -y
+
+COPY ./files /var/www/html/
+
+# COPY ./style.css /
+
+
+CMD ["sleep", "10000000"]
