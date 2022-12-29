@@ -58,28 +58,42 @@ services:
       - db_user=ss
       - db_pwd=tt
     restart: always
-  ftp:
-    build: ./requirements/bonus/ftp/.
-    depends_on:
-      - wordpress
-    volumes:
-      - wordpress:/var/www/html
-    ports:
-      - "21:21"
-      - "20:20"
-      - "40000-40005:40000-40005"
-    restart: always
-  adminer:
-    build: ./requirements/bonus/adminer/.
-    depends_on:
-      - mariadb
-    ports:
-      - "600:80"
-    restart: always
-  redis:
-    build: ./requirements/bonus/redis/.
-    volumes:
-     - wordpress:/var/www/html
-    depends_on:
-      - wordpress
-    restart: always
+  # ftp:
+  #   build: ./requirements/bonus/ftp/.
+  #   depends_on:
+  #     - wordpress
+  #   volumes:
+  #     - wordpress:/var/www/html
+  #   ports:
+  #     - "21:21"
+  #     - "20:20"
+  #     - "40000-40005:40000-40005"
+  #   restart: always
+  # adminer:
+  #   build: ./requirements/bonus/adminer/.
+  #   depends_on:
+  #     - mariadb
+  #   ports:
+  #     - "600:80"
+  #   restart: always
+  # redis:
+  #   build: ./requirements/bonus/redis/.
+  #   volumes:
+  #    - wordpress:/var/www/html
+  #   depends_on:
+  #     - wordpress
+  #   restart: always
+  # website:
+  #   build: ./requirements/bonus/website/.
+  #   ports:
+  #     - "3000:80"
+  # cadvisor:
+  #   build: ./requirements/bonus/cadvisor/.
+  #   ports:
+  #     - "8080:8080"
+  #   # volumes:
+  #   #   - /:/rootfs:ro
+  #   #   - /var/run:/var/run:ro 
+  #   #   - /sys:/sys:ro 
+  #   #   - /var/lib/docker/:/var/lib/docker:ro
+  #   restart: always

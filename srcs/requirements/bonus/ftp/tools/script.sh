@@ -1,9 +1,9 @@
 #!/bin/bash
 
 
-mkdir -p /var/www/html
+# mkdir -p /var/www/html
 
-service vsftpd start
+service vsftpd ftp start
 # cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak
 # mv /tmp/vsftpd.conf /etc/vsftpd/vsftpd.conf
 
@@ -21,20 +21,26 @@ echo "sami" | tee -a /etc/vsftpd.userlist &> /dev/null
 
 mkdir /home/sami/ftp
 
+chown nobody:nogroup /home/sami/ftp
+chmod a-w /home/sami/ftp
+
 mkdir /home/sami/ftp/files
 chown sami:sami /home/sami/ftp/files
 
 sed -i -r "s/#write_enable=YES/write_enable=YES/1"   /etc/vsftpd.conf
 sed -i -r "s/#chroot_local_user=YES/chroot_local_user=YES/1"   /etc/vsftpd.conf
 
-echo "user_sub_token=sami
+echo "
+local_enable=YES
+allow_writeable_chroot=YES
+pasv_enable=YES
 local_root=/home/sami/ftp
 pasv_min_port=40000
-pasv_max_port=50000
-userlist_enable=YES
-userlist_file=/etc/vsftpd.userlist
-userlist_deny=NO" >> /etc/vsftpd.conf
+pasv_max_port=40005
+userlist_file=/etc/vsftpd.userlist" >> /etc/vsftpd.conf
 
 service vsftpd stop
+
+
 /usr/sbin/vsftpd
-sleep 10000000
+# sleep 10000000
