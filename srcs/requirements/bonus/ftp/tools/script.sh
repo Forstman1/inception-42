@@ -1,11 +1,7 @@
 #!/bin/bash
 
 
-# mkdir -p /var/www/html
-
-service vsftpd ftp start
-# cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf.bak
-# mv /tmp/vsftpd.conf /etc/vsftpd/vsftpd.conf
+service vsftpd start
 
 # Add the USER, change his password and declare him as the owner of wordpress folder and all subfolders
 
@@ -17,7 +13,6 @@ chown -R sami:sami /var/www/html
 
 echo "sami" | tee -a /etc/vsftpd.userlist &> /dev/null
 
-# /usr/sbin/vsftpd /etc/vsftpd.conf
 
 mkdir /home/sami/ftp
 
@@ -43,4 +38,3 @@ service vsftpd stop
 
 
 /usr/sbin/vsftpd
-# sleep 10000000
