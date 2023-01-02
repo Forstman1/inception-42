@@ -5,22 +5,22 @@ service vsftpd start
 
 # Add the USER, change his password and declare him as the owner of wordpress folder and all subfolders
 
-adduser sami --disabled-password
+adduser $ftp_user --disabled-password
 
-echo "sami:nice" | /usr/sbin/chpasswd &> /dev/null
+echo "$ftp_user:$ftp_pwd" | /usr/sbin/chpasswd &> /dev/null
 
-chown -R sami:sami /var/www/html
+# chown -R $ftp_user:$ftp_user /var/www/html
 
-echo "sami" | tee -a /etc/vsftpd.userlist &> /dev/null
+echo "$ftp_user" | tee -a /etc/vsftpd.userlist &> /dev/null
 
 
-mkdir /home/sami/ftp
+mkdir /home/$ftp_user/ftp
 
-chown nobody:nogroup /home/sami/ftp
-chmod a-w /home/sami/ftp
+chown nobody:nogroup /home/$ftp_user/ftp
+chmod a-w /home/$ftp_user/ftp
 
-mkdir /home/sami/ftp/files
-chown sami:sami /home/sami/ftp/files
+mkdir /home/$ftp_user/ftp/files
+chown $ftp_user:$ftp_user /home/$ftp_user/ftp/files
 
 sed -i -r "s/#write_enable=YES/write_enable=YES/1"   /etc/vsftpd.conf
 sed -i -r "s/#chroot_local_user=YES/chroot_local_user=YES/1"   /etc/vsftpd.conf

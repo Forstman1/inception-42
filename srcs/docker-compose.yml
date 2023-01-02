@@ -61,7 +61,9 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - wordpress:/var/www/html
+      - wordpress:/home/sami/ftp/files
+    env_file:
+      - .env
     ports:
       - "21:21"
       - "20:20"
@@ -69,43 +71,43 @@ services:
     networks:
       - inception
     restart: always
-  adminer:
-    container_name: adminer
-    build: ./requirements/bonus/adminer/.
-    depends_on:
-      - mariadb
-    ports:
-      - "600:80"
-    networks:
-      - inception
-    restart: always
-  redis:
-    container_name: redis
-    build: ./requirements/bonus/redis/.
-    volumes:
-     - wordpress:/var/www/html
-    depends_on:
-      - wordpress
-    networks:
-      - inception
-    restart: always
-  website:
-    container_name: website
-    build: ./requirements/bonus/website/.
-    ports:
-      - "3000:80"
-    networks:
-      - inception
-  cadvisor:
-    container_name: cadvisor
-    build: ./requirements/bonus/cadvisor/.
-    ports:
-      - "8080:8080"
-    networks:
-      - inception
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro 
-      - /sys:/sys:ro 
-      - /var/lib/docker/:/var/lib/docker:ro
-    restart: always
+  # adminer:
+  #   container_name: adminer
+  #   build: ./requirements/bonus/adminer/.
+  #   depends_on:
+  #     - mariadb
+  #   ports:
+  #     - "600:80"
+  #   networks:
+  #     - inception
+  #   restart: always
+  # redis:
+  #   container_name: redis
+  #   build: ./requirements/bonus/redis/.
+  #   volumes:
+  #    - wordpress:/var/www/html
+  #   depends_on:
+  #     - wordpress
+  #   networks:
+  #     - inception
+  #   restart: always
+  # website:
+  #   container_name: website
+  #   build: ./requirements/bonus/website/.
+  #   ports:
+  #     - "3000:80"
+  #   networks:
+  #     - inception
+  # cadvisor:
+  #   container_name: cadvisor
+  #   build: ./requirements/bonus/cadvisor/.
+  #   ports:
+  #     - "8080:8080"
+  #   networks:
+  #     - inception
+  #   volumes:
+  #     - /:/rootfs:ro
+  #     - /var/run:/var/run:ro 
+  #     - /sys:/sys:ro 
+  #     - /var/lib/docker/:/var/lib/docker:ro
+  #   restart: always
