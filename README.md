@@ -39,7 +39,7 @@ but you can be asking your self why not use virtual machine it might be good ide
 
 # Let’s go deeper on how Docker Engine works in details.
 
-![Screen Shot 2022-11-24 at 8.29.31 PM.png](Inception_42%209b733464a6e04bd6a2a532d88f8be09b/Screen_Shot_2022-11-24_at_8.29.31_PM.png)
+![Screen Shot 2022-11-24 at 8.29.31 PM.png](Inception_42/Screen_Shot_2022-11-24_at_8.29.31_PM.png)
 
 The Docker engine is the core component of Docker. It is a lightweight runtime and packaging tool that bundles your application and its dependencies into a single package, called a container. The Docker engine includes the Docker daemon, which is a background process that manages Docker containers, and the Docker client, which is a command-line tool that allows you to interact with the Docker daemon.
 
@@ -94,7 +94,7 @@ Using Docker Compose can simplify the process of managing multi-container applic
 
 ## Here is a simple example of a Docker Compose file
 
-![Screen Shot 2023-01-02 at 4.26.37 PM.png](Inception_42%209b733464a6e04bd6a2a532d88f8be09b/Screen_Shot_2023-01-02_at_4.26.37_PM.png)
+![Screen Shot 2023-01-02 at 4.26.37 PM.png](Inception_42/Screen_Shot_2023-01-02_at_4.26.37_PM.png)
 
 ## What are the most common commands are used in docker-compose ?
 
