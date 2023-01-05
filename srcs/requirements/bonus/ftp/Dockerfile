@@ -1,7 +1,7 @@
 FROM debian:buster
 
 
-RUN apt -y update && apt -y upgrade 
+RUN apt update -y
 
 RUN apt install vsftpd -y
 

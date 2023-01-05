@@ -1,8 +1,6 @@
 FROM debian:buster
 
 
-RUN apt -y update 
-
 RUN apt-get -y update && apt install redis-server -y && echo "maxmemory 256mb" >> /etc/redis/redis.conf
 
 RUN echo "maxmemory-policy allkeys-lru" >> /etc/redis/redis.conf

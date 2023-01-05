@@ -71,16 +71,16 @@ services:
     networks:
       - inception
     restart: always
-  # adminer:
-  #   container_name: adminer
-  #   build: ./requirements/bonus/adminer/.
-  #   depends_on:
-  #     - mariadb
-  #   ports:
-  #     - "600:80"
-  #   networks:
-  #     - inception
-  #   restart: always
+  adminer:
+    container_name: adminer
+    build: ./requirements/bonus/adminer/.
+    depends_on:
+      - mariadb
+    ports:
+      - "600:80"
+    networks:
+      - inception
+    restart: always
   redis:
     container_name: redis
     build: ./requirements/bonus/redis/.
@@ -91,13 +91,13 @@ services:
     networks:
       - inception
     restart: always
-  # website:
-  #   container_name: website
-  #   build: ./requirements/bonus/website/.
-  #   ports:
-  #     - "3000:80"
-  #   networks:
-  #     - inception
+  website:
+    container_name: website
+    build: ./requirements/bonus/website/.
+    ports:
+      - "3000:3000"
+    networks:
+      - inception
   cadvisor:
     container_name: cadvisor
     build: ./requirements/bonus/cadvisor/.

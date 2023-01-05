@@ -1,7 +1,7 @@
 FROM debian:buster
 
 
-RUN apt-get -y update  && apt update -y 
+RUN apt update -y 
 
 RUN apt install php-fpm php-mysql -y
 
