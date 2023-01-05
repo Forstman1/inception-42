@@ -5,14 +5,14 @@ volumes:
                 name: wordpress
                 driver: local
                 driver_opts:
-                        device: /home/sahafid/data/wordpress
+                        device: /Users/sahafid/Desktop/Inception/srcs/wordpress
                         o: bind
                         type: none
         mariadb:
                 name: mariadb
                 driver: local
                 driver_opts:
-                        device: /home/sahafid/data/mariadb
+                        device: /Users/sahafid/Desktop/Inception/srcs/mariadb
                         o: bind
                         type: none
 
@@ -71,16 +71,16 @@ services:
     networks:
       - inception
     restart: always
-  adminer:
-    homeiner_name: adminer
-    build: ./requirements/bonus/adminer/.
-    depends_on:
-      - mariadb
-    ports:
-      - "600:80"
-    networks:
-      - inception
-    restart: always
+  # adminer:
+  #   container_name: adminer
+  #   build: ./requirements/bonus/adminer/.
+  #   depends_on:
+  #     - mariadb
+  #   ports:
+  #     - "600:80"
+  #   networks:
+  #     - inception
+  #   restart: always
   redis:
     container_name: redis
     build: ./requirements/bonus/redis/.
@@ -91,13 +91,13 @@ services:
     networks:
       - inception
     restart: always
-  website:
-    container_name: website
-    build: ./requirements/bonus/website/.
-    ports:
-      - "3000:80"
-    networks:
-      - inception
+  # website:
+  #   container_name: website
+  #   build: ./requirements/bonus/website/.
+  #   ports:
+  #     - "3000:80"
+  #   networks:
+  #     - inception
   cadvisor:
     container_name: cadvisor
     build: ./requirements/bonus/cadvisor/.
