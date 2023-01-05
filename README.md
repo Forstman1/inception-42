@@ -39,6 +39,8 @@ but you can be asking your self why not use virtual machine it might be good ide
 
 # Let’s go deeper on how Docker Engine works in details.
 
+![Screen Shot 2022-11-24 at 8.29.31 PM.png](Inception_42%209b733464a6e04bd6a2a532d88f8be09b/Screen_Shot_2022-11-24_at_8.29.31_PM.png)
+
 The Docker engine is the core component of Docker. It is a lightweight runtime and packaging tool that bundles your application and its dependencies into a single package, called a container. The Docker engine includes the Docker daemon, which is a background process that manages Docker containers, and the Docker client, which is a command-line tool that allows you to interact with the Docker daemon.
 
 Here's how the Docker engine works:
@@ -84,6 +86,86 @@ Here are some key differences between a Dockerfile and a Docker Compose file:
 9. **`docker exec`**: Used to execute a command in a running Docker container.
 10. **`docker logs`**: Used to view the logs for a Docker container.
 
+## DOCKER COMPOSE
+
+Docker Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application's services. Then, using a single command, you can create and start all the services from your configuration.
+
+Using Docker Compose can simplify the process of managing multi-container applications by allowing you to define all of your services in a single place and easily start and stop them. It also makes it easy to scale your application by allowing you to increase or decrease the number of replicas of a service.
+
+## Here is a simple example of a Docker Compose file
+
+![Screen Shot 2023-01-02 at 4.26.37 PM.png](Inception_42%209b733464a6e04bd6a2a532d88f8be09b/Screen_Shot_2023-01-02_at_4.26.37_PM.png)
+
+## What are the most common commands are used in docker-compose ?
+
+- **`up`**: Create and start containers
+- **`down`**: Stop and remove containers, networks, images, and volumes
+- **`start`**: Start existing containers
+- **`stop`**: Stop running containers
+- **`restart`**: Restart running containers
+- **`build`**: Build images
+- **`ps`**: List containers
+- **`logs`**: View output from containers
+- **`exec`**: Run a command in a running container
+- **`pull`**: Pull images from a registry
+- **`push`**: Push images to a registry
+
+## What are DOCKER NETWORKS
+
+In Docker, a network is a virtual software defined network that connects Docker containers. It allows containers to communicate with each other and the outside world, and it provides an additional layer of abstraction over the underlying network infrastructure.
+
+There are several types of networks that you can create in Docker, including:
+
+- Bridge: A bridge network is the default network type when you install Docker. It allows containers to communicate with each other and the host machine, but provides no access to the outside world.
+- Host: A host network uses the host machine's network stack and provides no isolation between the host and the container.
+- Overlay: An overlay network allows containers running on different Docker hosts to communicate with each other.
+- Macvlan: A Macvlan network allows a container to have its own IP address on the same subnet as the host machine.
+
+You can create and manage networks using the **`docker network`** command. For example, to create a new bridge network, you can use the following command:
+
+`docker network create my-network`
+
+- ressources for docker network : [https://www.youtube.com/watch?v=bKFMS5C4CG0](https://www.youtube.com/watch?v=bKFMS5C4CG0)
+
+## What are DOCKER VOLUMES
+
+In Docker, a volume is a persistent storage location that is used to store data from a container. Volumes are used to persist data from a container even after the container is deleted, and they can be shared between containers.
+
+There are two types of volumes in Docker:
+
+- Bind mount: A bind mount is a file or directory on the host machine that is mounted into a container. Any changes made to the bind mount are reflected on the host machine and in any other containers that mount the same file or directory.
+- Named volume: A named volume is a managed volume that is created and managed by Docker. It is stored in a specific location on the host machine, and it is not tied to a specific file or directory on the host. Named volumes are useful for storing data that needs to be shared between containers, as they can be easily attached and detached from containers.
+
+You can create and manage volumes using the **`docker volume`** command. For example, to create a new named volume, you can use the following command:
+
+```bash
+docker volume create my-volume
+```
+
+To mount a volume into a container, you can use the **`-v`** flag when starting the container. For example:
+
+```bash
+docker run -v my-volume:/var/lib/mysql mysql
+```
+
+This command will start a container running the **`mysql`** image and mount the **`my-volume`** volume at **`/var/lib/mysql`** in the container. Any data written to this location in the container will be persisted in the volume, even if the container is deleted.
+
+You can also use Docker Compose to create and manage volumes. In a Compose file, you can define a volume and attach it to a service. For example:
+
+```yaml
+version: '3'
+services:
+  db:
+    image: mysql
+    volumes:
+      - db-data:/var/lib/mysql
+volumes:
+  db-data:
+
+```
+
+This Compose file defines a **`db-data`** volume and attaches it to the **`db`** service at **`/var/lib/mysql`**. Any data written to this location in the container will be persisted in the volume.
+
 # MANDATORY PART
 
 ## **Mariadb**
@@ -111,7 +193,10 @@ MariaDB includes a number of additional features and improvements over MySQL, in
 echo "CREATE DATABASE IF NOT EXISTS $db_name ;" > db1.sql
 echo "CREATE USER IF NOT EXISTS '$db_user'@'%' IDENTIFIED BY '$db_pwd' ;" >> db1.sql
 echo "GRANT ALL PRIVILEGES ON $db_name.* TO '$db_user'@'%' ;" >> db1.sql
+echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '12345' ;" >> db1.sql
 echo "FLUSH PRIVILEGES;" >> db1.sql
+
+mysql < db1.sql
 ```
 
 to keep the container running run this command in CMD in your Dockerfile  `/usr/bin/mysqld_safe`
@@ -151,7 +236,7 @@ My source source of info [`https://developer.wordpress.org/cli/commands/core/`](
 - script part:
 
 ```bash
-#!bin/bash
+#!/bin/bash
 
 # create directory to use in nginx container later and also to setup the wordpress conf
 mkdir /var/www/
@@ -246,7 +331,7 @@ OpenSSL is often used by system administrators and developers to secure communic
 1. pull `debian:buster`  (our base image)
 2. update our package manager  `apt update -y` && `apt upgrade -y`
 3. `apt install -y nginx` && `apt install openssl -y` will install the NGINX web server and the OpenSSL tool.
-4. openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=MO/L=KH/O=1337/OU=student/CN=[sahafid.1337.ma](http://sahafid.42.ma/)"
+4. `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt -subj "/C=MO/L=KH/O=1337/OU=student/CN=[sahafid.1337.ma](http://sahafid.42.ma/)"`
 
 This command generates a self-signed SSL/TLS certificate and private key using OpenSSL.
 
@@ -274,7 +359,7 @@ server {
 # replace login with your own loggin
 	server_name www.login.42.fr login.42.fr;
 
-# The ssl_certificate and ssl_certificate_key directives specify the locations of the SSL/TLS certificate and private key, respectively, that will be used to encrypt the traffic. The ssl_protocols directive specifies the TLS protocols that the server should support. im gonna show you how to generate the certificate in the script part :) 
+# The ssl_certificate and ssl_certificate_key directives specify the locations of the SSL/TLS certificate and private key, respectively, that will be used to encrypt the traffic. The ssl_protocols directive specifies the TLS protocols that the server should support.
 	ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
 	ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
 
@@ -285,7 +370,8 @@ server {
 	index index.php;
 	root /var/www/html;
 
-# The location block specifies a set of rules for handling requests for PHP files.
+# The location directive defines a block of configuration that applies to a specific location, which is specified using a regular expression. In this case, the regular expression ~ [^/]\\.php(/|$) matches any request that ends in .php and is not preceded by a / character.
+
 	location ~ [^/]\\.php(/|$) {
 
 # The try_files directive attempts to serve the requested file, and if it does not exist, it will return a 404 error.
@@ -333,3 +419,143 @@ server {
 you gonna copy this configuration into this file `/etc/nginx/sites-available/default`
 
 to keep the container running you should use this command `nginx -g daemon off;`
+
+The **`nginx -g daemon off;`** command is used to start the Nginx web server in the foreground and to disable daemon mode.
+
+In Nginx, the **`daemon`** directive is used to enable or disable daemon mode, which determines how the Nginx process is run. When daemon mode is enabled, the Nginx process runs in the background and detaches from the terminal. When daemon mode is disabled, the Nginx process runs in the foreground and stays connected to the terminal.
+
+# BONUS PART
+
+## Adminer
+
+Adminer is a tool for managing database systems. It is a single PHP file that provides a user-friendly interface for working with databases. With Adminer, you can create and drop databases, create, copy, alter, and drop tables, delete, edit, and add fields, execute any SQL command, and manage users and permissions. Adminer supports a wide range of database systems, including MySQL, MariaDB, PostgreSQL, SQLite, Oracle, and MS SQL. It is open source software that can be used on any server with PHP installed.
+
+- Installation part:
+
+1. pull `debian:buster`  (our base image)
+2. update our package manager  `apt update -y` 
+3. `apt install wget -y` && `apt-get install php php-mysql -y`
+
+- The **`wget`** package is a utility for downloading files from the internet.
+- PHP is a programming language that is often used to develop dynamic web applications. The PHP MySQL module allows PHP to communicate with MySQL databases.
+After running this command, you will have the necessary software installed to run a PHP web application that interacts with a MySQL database.
+
+## FTP (File Transfert Protocol)
+
+File Transfer Protocol (FTP) is a standard network protocol used to transfer files from one host to another over a TCP-based network, such as the internet. FTP is built on a client-server architecture and uses separate control and data connections between the client and the server.
+
+The FTP protocol enables clients to upload and download files, create and delete directories, and list the contents of directories on a remote server. FTP clients are available for all major operating systems, and most modern web browsers also support FTP.
+
+### Difference between active and passive mode Connections
+
+In FTP, there are two modes of data transfer: active and passive. In active mode, the client initiates a connection to the server to transfer data. In passive mode, the client initiates a connection to the server to request a data transfer, and the server then initiates a connection back to the client to send the data.
+
+Passive mode is often used when the client is behind a firewall or NAT (Network Address Translation) device, because the client's firewall or NAT may block incoming connections from the server. Passive mode allows the client to establish the connection with the server, and then the server can establish a connection back to the client to send data.
+
+- Installation part:
+
+1. pull `debian:buster`  (our base image)
+2. update our package manager  `apt update -y` 
+3. `apt install vsftpd -y`
+
+**`vsftpd`** package on your system. **`vsftpd`**
+ stands for "Very Secure FTP Daemon," and it is a popular FTP server software for Unix-like systems. Once installed, you can use **`vsftpd`** to set up and manage an FTP server on your system.
+
+- script part:
+
+```bash
+#!/bin/bash
+
+service vsftpd start
+
+# Add the USER, change his password and declare him as the owner of wordpress folder and all subfolders
+
+adduser $ftp_user --disabled-password
+
+echo "$ftp_user:$ftp_pwd" | /usr/sbin/chpasswd &> /dev/null
+
+echo "$ftp_user" | tee -a /etc/vsftpd.userlist &> /dev/null
+
+mkdir /home/$ftp_user/ftp
+
+chown nobody:nogroup /home/$ftp_user/ftp
+chmod a-w /home/$ftp_user/ftp
+
+mkdir /home/$ftp_user/ftp/files
+chown $ftp_user:$ftp_user /home/$ftp_user/ftp/files
+
+sed -i -r "s/#write_enable=YES/write_enable=YES/1"   /etc/vsftpd.conf
+sed -i -r "s/#chroot_local_user=YES/chroot_local_user=YES/1"   /etc/vsftpd.conf
+
+echo "
+local_enable=YES
+allow_writeable_chroot=YES
+pasv_enable=YES
+local_root=/home/sami/ftp
+pasv_min_port=40000
+pasv_max_port=40005
+userlist_file=/etc/vsftpd.userlist" >> /etc/vsftpd.conf
+
+service vsftpd stop
+
+/usr/sbin/vsftpd
+```
+
+1. The script starts the **`vsftpd`** service using the **`service`** command.
+2. It adds a new user using the **`adduser`** command, with the username specified by the **`$ftp_user`** variable. The **`-disabled-password`** flag specifies that the user should not be able to log in using a password.
+3. The script then sets the password for the user to the value specified by the **`$ftp_pwd`** variable.
+4. It adds the new user's username to the **`/etc/vsftpd.userlist`** file, which is used by **`vsftpd`** to specify which users are allowed to log in to the FTP server.
+5. The script creates a new directory at **`/home/$ftp_user/ftp`** and sets the owner to **`nobody:nogroup`**. It then sets the permissions on this directory so that it is not writable.
+6. The script creates another directory at **`/home/$ftp_user/ftp/files`** and sets the owner to **`$ftp_user:$ftp_user`**.
+7. It modifies the **`/etc/vsftpd.conf`** file to enable writing and chroot (i.e., jailing) for local users, and to enable passive mode and specify the range of ports to use for passive mode connections.
+8. The script stops the **`vsftpd`** service and starts it again using the **`/usr/sbin/vsftpd`** command.
+
+## REDIS cache
+
+Redis is an in-memory data structure store that can be used as a database, cache, and message broker. It supports a variety of data structures such as strings, hashes, lists, sets, and more. One of the main features of Redis is its ability to cache data in memory, which allows it to achieve very fast read and write speeds. Redis can be used to improve the performance of web applications by reducing the time it takes to access data from a database or other slow storage layer. In addition to its caching capabilities, Redis also offers publish/subscribe messaging, transactions, and support for multiple data structures, making it a versatile tool for a variety of use cases.
+
+- Installation part:
+
+1. pull `debian:buster`  (our base image)
+2. update our package manager  `apt update -y` 
+3. 
+
+```bash
+echo "maxmemory 256mb" >> /etc/redis/redis.conf
+echo "maxmemory-policy allkeys-lru" >> /etc/redis/redis.conf
+sed -i -r "s/bind 127.0.0.1/#bind 127.0.0.0/" /etc/redis/redis.conf
+```
+
+These commands will install the Redis server on your system and configure it to use a maximum of 256MB of memory. The "maxmemory" directive sets the maximum amount of memory that Redis is allowed to use. The "maxmemory-policy" directive specifies the policy that Redis should use when the maximum memory limit has been reached. In this case, the "allkeys-lru" policy will cause Redis to remove the least recently used keys in order to free up memory.
+
+It's important to carefully set the maximum memory limit for your Redis instance, as using too much memory can cause performance issues or even crash the system. You should also consider the type of workload that your Redis instance will be handling, as different workloads may have different memory requirements.
+
+for the last command This command modifies the **`redis.conf`** configuration file and comments out the **`bind`** directive, which specifies the IP address that the Redis server should listen on. By commenting out this directive, the Redis server will listen on all available network interfaces.
+
+to keep the redis  `CMD ["redis-server", "--protected-mode", "no"]`
+
+The **`redis-server`** command is used to start the Redis server, which is a persistent key-value store that can be used to store data structures such as strings, hashes, lists, and sets.
+
+The **`--protected-mode`** option specifies whether the Redis server should run in protected mode or not. Protected mode is a security feature that was introduced in Redis version 4.0. It prevents the Redis server from accepting connections from clients that are not running on the same host as the server.
+
+By specifying the **`no`** argument, the **`--protected-mode`** option disables protected mode and allows the Redis server to accept connections from clients running on any host.
+
+## CADVISOR (Extra service)
+
+cAdvisor (short for Container Advisor) is an open-source tool developed by Google for monitoring and analyzing resource usage and performance of containers. It provides information about the resource usage of individual containers, as well as the resource usage of the host machine itself.
+
+cAdvisor runs as a daemon on the host machine and collects resource usage and performance data from the operating system and individual containers. It exposes this data through a web-based interface and a set of RESTful APIs, allowing you to monitor and analyze the resource usage of your containers in real-time.
+
+cAdvisor is particularly useful for monitoring and optimizing the performance of containerized applications in a production environment. It can help you identify resource constraints, troubleshoot issues, and optimize resource allocation to improve the performance of your containers.
+
+- Installation part:
+1. pull `debian:buster`  (our base image)
+2. update our package manager  `apt update -y` 
+3. `apt install wget -y` (**`wget`** package, which is a utility for downloading files from the web.)
+4. `wget [https://github.com/google/cadvisor/releases/download/v0.37.0/cadvisor](https://github.com/google/cadvisor/releases/download/v0.37.0/cadvisor)` (download cadvisor from gihub)
+5. `chmod +x cadvisor` change permission to executable
+6. last but not least run the executable `./cadvisor` and you can find the stats in the website.
+
+note:
+
+make sure to expose port 8080 in docker-compose file and also connect the right volumes you can see how on the docker-compose file up  ☝️
