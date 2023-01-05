@@ -508,6 +508,12 @@ service vsftpd stop
 5. The script creates a new directory at **`/home/$ftp_user/ftp`** and sets the owner to **`nobody:nogroup`**. It then sets the permissions on this directory so that it is not writable.
 6. The script creates another directory at **`/home/$ftp_user/ftp/files`** and sets the owner to **`$ftp_user:$ftp_user`**.
 7. It modifies the **`/etc/vsftpd.conf`** file to enable writing and chroot (i.e., jailing) for local users, and to enable passive mode and specify the range of ports to use for passive mode connections.
+8. **`local_enable=YES`**: This directive tells **`vsftpd`** to allow local users to log in to the FTP server.
+9. **`allow_writeable_chroot=YES`**: This directive tells **`vsftpd`** to allow local users to have write access to their home directories.
+10. **`pasv_enable=YES`**: This directive tells **`vsftpd`** to allow passive mode connections.
+11. **`local_root=/home/sami/ftp`**: This directive specifies the root directory for local users. All local users will be jailed (i.e., restricted) to this directory and its subdirectories.
+12. **`pasv_min_port`** and **`pasv_max_port`**: These directives specify the range of ports that the server can use to establish a connection back to the client when in passive mode.
+13. **`userlist_file=/etc/vsftpd.userlist`**: This directive specifies the file that contains the list of users who are allowed to log in to the FTP serve
 8. The script stops the **`vsftpd`** service and starts it again using the **`/usr/sbin/vsftpd`** command.
 
 ## REDIS cache
