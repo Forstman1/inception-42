@@ -1,0 +1,76 @@
+@media screen and (max-width: 800px){
+	#title {
+		font-size: 30px;
+	}
+	#bar {
+		width: 80%;
+	}
+	#font {
+		font-size: 20px;
+	}
+	#score-number {
+		font-size: 40px;
+	}
+}
+
+@media screen and (max-width: 700px){
+	#paper-image img
+	{
+		height: 20px;
+	}
+	#paper {
+		width: 70px;
+		height: 70px;
+		border: 10px solid hsl(230, 89%, 65%);
+	}
+	#scissors {
+		width: 70px;
+		height: 70px;
+		border: 10px solid hsl(40, 84%, 53%);
+	}
+	#scissors-image img
+	{
+		height: 20px;
+	}
+	#rock {
+		width: 70px;
+		height: 70px;
+		border: 10px solid hsl(349, 70%, 56%);
+	}
+	#rock-image img
+	{
+		height: 20px;
+	}
+	#rules {
+		margin-top: 10%;
+		width: 40%;
+		height: 40px;
+		font-size: 20px;
+	}
+	#my-pick {
+		width: 100px;
+		height: 100px;
+		border: 15px solid red;
+	}
+	#my-pick img {
+		height: 40px;
+	}
+	#house-pick {
+		width: 100px;
+		height: 100px;
+		border: 15px solid red;
+	}
+	#house-pick img {
+		height: 40px;
+	}
+	#fonts {
+		font-size: 20px;
+	}
+	#result {
+		font-size: 20px;
+	}
+	#play-again {
+		width: 100%;
+		font-size: 18px;
+	}
+}

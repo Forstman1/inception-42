@@ -1,0 +1,131 @@
+@keyframes rotation {
+	from {
+	  transform: rotate(0deg);
+	}
+	to {
+	  transform: rotate(359deg);
+	}
+}
+
+.paper {
+	display: grid;
+	width: 150px;
+	background-color: white;
+	height: 150px;
+	border-radius: 50%;
+	justify-items: center;
+	border: 25px solid hsl(230, 89%, 65%);
+	animation: rotation 1.5s infinite linear;
+	cursor: pointer;
+}
+
+#paper-image {
+	display: block;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.scissors {
+	display: grid;
+	width: 150px;
+	background-color: white;
+	height: 150px;
+	border-radius: 50%;
+	justify-items: center;
+	text-align: center;
+	border: 25px solid hsl(40, 84%, 53%);
+	animation: rotation 1.5s infinite linear;
+	cursor: pointer;
+}
+
+#scissors-image {
+	display: block;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.rock {
+	display: grid;
+	float: right;
+	width: 150px;
+	background-color: white;
+	height: 150px;
+	border-radius: 50%;
+	justify-items: center;
+	text-align: center;
+	border: 25px solid hsl(349, 70%, 56%);
+	animation: rotation 1.5s infinite linear;
+	cursor: pointer;
+}
+
+#rock-image {
+	display: block;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+#rock:hover {
+	transition: 2s;
+	opacity: 0.8;
+}
+#paper:hover {
+	transition: 2s;
+	opacity: 0.8;
+}
+#scissors:hover {
+	transition: 2s;
+	opacity: 0.8;
+}
+
+.rules {
+	color: white;
+	font-size: 25px;
+	float: right;
+	width: 15%;
+	height: 50px;
+	border: 2px solid whitesmoke;
+	border-radius: 15px;
+	background-color: hsl(214, 47%, 23%);
+	cursor: pointer;
+}
+
+#rules:hover {
+	transition: 1s;
+	background-color: hsl(214, 73%, 13%);
+}
+
+#rules-page {
+	position: none;
+	width: 100%;
+	height: 100%;
+	opacity: 0.5;
+	background-color: gray;
+}
+
+#rule-image {
+	text-align: center;
+}
+
+#rule-box {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	width: 500px;
+	height: 600px;
+	border-radius: 15px;
+}
+
+#text-above {
+	width: 100%;
+	height: 100px;
+}
+
+#icon-close {
+	width: 10%;
+	height: 30%;
+	float: right;
+	cursor: pointer;
+}
