@@ -24,6 +24,7 @@ services:
   nginx:
     container_name: nginx
     build: ./requirements/nginx/.
+    image: nginx:42
     ports:
      - "443:443"
     depends_on:
@@ -36,6 +37,7 @@ services:
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress/.
+    image: wordpress:42
     depends_on:
       - mariadb
     volumes:
@@ -48,6 +50,7 @@ services:
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb/.
+    image: mariadb:42
     volumes:
       - mariadb:/var/lib/mysql
     env_file:
@@ -58,6 +61,7 @@ services:
   ftp:
     container_name: ftp
     build: ./requirements/bonus/ftp/.
+    image: ftp:42
     depends_on:
       - wordpress
     volumes:
@@ -74,6 +78,7 @@ services:
   adminer:
     container_name: adminer
     build: ./requirements/bonus/adminer/.
+    image: adminer:42
     depends_on:
       - mariadb
     ports:
@@ -84,6 +89,7 @@ services:
   redis:
     container_name: redis
     build: ./requirements/bonus/redis/.
+    image: redis:42
     volumes:
      - wordpress:/var/www/html
     depends_on:
@@ -94,6 +100,7 @@ services:
   website:
     container_name: website
     build: ./requirements/bonus/websites/.
+    image: website:42
     ports:
       - "3000:3000"
     networks:
@@ -101,6 +108,7 @@ services:
   cadvisor:
     container_name: cadvisor
     build: ./requirements/bonus/cadvisor/.
+    image: cadvisor:42
     ports:
       - "8080:8080"
     networks:
