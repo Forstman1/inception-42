@@ -93,7 +93,7 @@ services:
     restart: always
   website:
     container_name: website
-    build: ./requirements/bonus/website/.
+    build: ./requirements/bonus/websites/.
     ports:
       - "3000:3000"
     networks:
