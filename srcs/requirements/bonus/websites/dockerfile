@@ -4,7 +4,7 @@ RUN apt update -y
 
 RUN apt install nodejs npm -y
 
-COPY ./files /home/app
+COPY ./tools /home/app
 
 WORKDIR /home/app
 
