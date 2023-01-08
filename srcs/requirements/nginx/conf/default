@@ -2,9 +2,9 @@ server {
     listen 443 ssl;
     listen [::]:443 ssl;
 
-    #server_name www.sahafid.42.ma sahafid.42.ma;
+    server_name www.sahafid.1337.ma sahafid.1337.ma;
 
-    ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+    ssl_certificate here_certs;
     ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
 
     ssl_protocols TLSv1.3;

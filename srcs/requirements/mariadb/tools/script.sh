@@ -1,4 +1,5 @@
-#!bin/bash
+#!/bin/bash
+
 
 
 service mysql start 
@@ -12,4 +13,6 @@ echo "FLUSH PRIVILEGES;" >> db1.sql
 
 mysql < db1.sql
 
-/usr/bin/mysqld_safe
+kill $(cat /var/run/mysqld/mysqld.pid)
+
+mysqld

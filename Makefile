@@ -6,7 +6,7 @@
 #    By: sahafid <sahafid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/01 14:18:11 by sahafid           #+#    #+#              #
-#    Updated: 2023/01/01 15:44:47 by sahafid          ###   ########.fr        #
+#    Updated: 2023/01/07 01:59:32 by sahafid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,3 @@ start :
 
 status : 
 	@docker ps
-
-clean : 
-	@docker rmi -f $(docker images -qa)
-
-fclean : clean
-	@docker volume rm -f $(docker volume ls -q)
-	
