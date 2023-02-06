@@ -554,6 +554,15 @@ The **`--protected-mode`** option specifies whether the Redis server should run 
 
 By specifying the **`no`** argument, the **`--protected-mode`** option disables protected mode and allows the Redis server to accept connections from clients running on any host.
 
+
+and add these line to wp-config.php 
+
+
+define( 'WP_REDIS_HOST', 'redis' );
+define( 'WP_REDIS_PORT', 6379 );
+define('WP_CACHE', true);
+
+
 ## CADVISOR (Extra service)
 
 cAdvisor (short for Container Advisor) is an open-source tool developed by Google for monitoring and analyzing resource usage and performance of containers. It provides information about the resource usage of individual containers, as well as the resource usage of the host machine itself.
